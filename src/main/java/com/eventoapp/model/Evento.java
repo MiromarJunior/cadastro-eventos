@@ -3,12 +3,14 @@ package com.eventoapp.model;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,7 +20,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "evento")
 public class Evento implements Serializable {
@@ -30,49 +35,23 @@ public class Evento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
-	@Column(length = 100)
+	@Column(length = 150)
 	private String nome;
+
+	@Column(length = 150)
 	private String local;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date data;
 	private String horario;
-	public Long getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getLocal() {
-		return local;
-	}
-	public void setLocal(String local) {
-		this.local = local;
-	}
-	public Date getData() {
-		return data;
-	}
-	public void setData(Date data) {
-		
-		this.data = data;
-	}
-	public String getHorario() {
-		return horario;
-	}
-	public void setHorario(String horario) {
-		this.horario = horario;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+
+	//@OneToMany
+	//private List<Convidado> convidados;
 	
-	
+	public String getData() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		return sdf.format(data);
+	}
 	
 
 }
