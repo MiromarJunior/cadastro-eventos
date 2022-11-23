@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,14 +37,19 @@ public class Evento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
-	@Column(length = 150)
+	@NotEmpty
+	@Column(length = 150 , nullable = false)
 	private String nome;
 
+	@NotEmpty
 	@Column(length = 150)
 	private String local;
 	
+	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date data;
+
+	@NotEmpty
 	private String horario;
 
 	//@OneToMany
