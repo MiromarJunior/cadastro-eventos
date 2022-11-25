@@ -8,16 +8,29 @@
 
 <link type="text/css" rel="stylesheet"
 	href="materialize/css/materialize.min.css" media="screen,projection" />
+	<link type="text/css" href="style/style.css" rel="stylesheet"/>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta charset="UTF-8" lang="pt-BR">
 <title>Eventos App</title>
 </head>
 <body>
-	<h1>Cadastro de Eventos</h1>
-	<a href="/eventos" class="waves-effect waves-light btn"><i
-		class="material-icons left">format_align_justify</i>Listar Eventos</a>
-<div class="row container">
+	<header>
+		<nav>
+			<div class="nav-wrapper">
+			  <a href="#" class="brand-logo right">Cadastro de Eventos</a>
+			  <ul id="nav-mobile" class="left hide-on-med-and-down">
+				<li><a href="/eventos" class="waves-effect waves-light btn"><i
+					class="material-icons left">format_align_justify</i>Listar Eventos</a></li>
+				
+			  </ul>
+			</div>
+		  </nav>
+				
+	</header>
+	
+	
+<div class="row container formEvento">
 	<th:block th:include="mensagemValidacao"></th:block>
 	<form method="post" class="container col s12" >
 		<div  class="row" >

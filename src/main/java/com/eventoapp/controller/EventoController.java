@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,6 +56,25 @@ public class EventoController {
 		mv.addObject("eventos", eventos);
 		return mv;
 	}
+
+
+	@RequestMapping("/deletarEvento")
+	public String deletarEvento(long codigo){
+		Evento evento = rep.findByCodigo(codigo);
+		rep.delete(evento);
+		return "redirect:/eventos";
+	}
+
+	@RequestMapping("/deletarConvidado")
+	public String deletarConvidado(String rg){
+		Convidado convidado = repConv.findByRg(rg);		
+		repConv.delete(convidado);
+		Evento evento = convidado.getEvento();
+		String codigo = ""+evento.getCodigo() ;
+
+		return "redirect:/"+codigo;
+	}
+
 
 	@GetMapping("/{codigo}")
 	public ModelAndView detalhesEvento(@PathVariable("codigo") long codigo) {

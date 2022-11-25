@@ -10,16 +10,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" href="style/style.css" rel="stylesheet"/>
     <title>Detalhe Evento</title>
 </head>
 
 <body>
-    <h1>Evento</h1>
-    <a href="/eventos" class="waves-effect waves-light btn"><i
-            class="material-icons left">format_align_justify</i>Listar Eventos</a>
+    <header>
+		<nav>
+			<div class="nav-wrapper">
+			  <a href="#" class="brand-logo right">Evento</a>
+			  <ul id="nav-mobile" class="left hide-on-med-and-down">
+				<li><a href="/eventos" class="waves-effect waves-light btn"><i
+                    class="material-icons left">format_align_justify</i>Listar Eventos</a></li>
+				
+			  </ul>
+			</div>
+		  </nav>
+				
+	</header>
+    <h1></h1>
+    
 
     <div th:each="evento : ${evento}" class="container">
-        <div class="row">
+        <div h:each="evento : ${evento}" class=" row detalhesEvento">
+             <h5>Detalhes do Evento</h5>
             <p>
                 Nome : <span th:text="${evento.nome}"></span>
             </p>
@@ -36,23 +50,23 @@
 
         <th:block th:include="mensagemValidacao"></th:block>
 
-        <div class="row container">
-            <form method="post" class="container col s12">
+        <div class="row ">
+            <form method="post" class=" col s12 formConvidado">
                 <div class="row">
 
-                    <div class="input-field col s5">
+                    <div class="input-field col s12">
                         <label for="nomeConvidado">Nome do Convidado</label>
                         <input id="nomeConvidado" type="text" class="validate" value="" name="nomeConvidado">
                     </div>
 
 
 
-                    <div class="input-field col s4">
+                    <div class="input-field col s12">
                         <label for="rg">RG do Convidado</label>
                         <input type="text" class="validate" value="" name="rg" />
                     </div>
 
-                    <div class="input-field col s2">
+                    <div class="input-field col s12">
                         <button class="waves-effect waves-light btn" type="submit">Adicionar Convidado</button>
                     </div>
 
@@ -63,12 +77,13 @@
 
     </div>
     <div class="container">
-        <h5>Lista de Convidados</h5>
-        <table class="responsive-table">
+        
+        <table class="responsive-table tab">
             <thead>
                 <tr>
                     <th>Nome do Convidado</th>
                     <th>RG</th>
+                    <th>Deletar</th>
 
                 </tr>
             </thead>
@@ -77,6 +92,9 @@
 
                     <td><span th:text=${convidado.nomeConvidado}> </span></td>
                     <td><span th:text=${convidado.rg}> </span></td>
+                    <td>
+                        <a class=" btn-floating btn-large waves-effect waves-light red" th:href="${(#mvc.url('EC#deletarConvidado').arg(0,convidado.rg)).build()}" ><i
+                       class="material-icons left">delete</i></a></td>
 
                 </tr>
             </tbody>
